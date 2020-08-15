@@ -11,7 +11,8 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "parcel index.html --open"
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "@types/react": "^16.9.46",
