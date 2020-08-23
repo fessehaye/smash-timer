@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import AddCue from "./addCue";
 import PlayButton from "./playButton";
 import AudioCue from "./audioCue";
-import { Transport, Oscillator, now, Loop } from "tone";
+import { Transport, Oscillator, start, Loop } from "tone";
 
 export type AudioCue = {
   frame: number;
@@ -56,9 +56,9 @@ export default function App() {
 
   (window as any).state = { audioCues, frames, playing }; // for testing
 
-  const toggleLoop = () => {
+  const toggleLoop = async () => {
     setPlaying(!playing);
-
+    await start();
     if (playing) {
       loop.current.dispose();
       Transport.stop();
