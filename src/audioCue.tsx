@@ -4,7 +4,7 @@ import { AudioCue } from "./app";
 type AudioCueProps = {
   audioCue: AudioCue;
   playing: boolean;
-  removeRow: (id: number) => void;
+  removeRow: (id: string) => void;
   updateRow: (cue: AudioCue) => void;
 };
 

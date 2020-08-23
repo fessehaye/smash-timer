@@ -6,13 +6,20 @@ import { Transport, Oscillator, now, Loop } from "tone";
 
 export type AudioCue = {
   frame: number;
-  id: number;
+  id: string;
   description: string;
+};
+
+const ID = () => {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+  return "_" + Math.random().toString(36).substr(2, 9);
 };
 
 export default function App() {
   const [audioCues, setAudioCues] = useState<AudioCue[]>([
-    { frame: 0, description: "first beat", id: Date.now() },
+    { frame: 0, description: "first beat", id: ID() },
   ]);
   const [frames, setFrames] = useState<number>(60);
   const [playing, setPlaying] = useState<boolean>(false);
@@ -37,7 +44,7 @@ export default function App() {
           .get("audioCues")
           .split(",")
           .map((cue) => {
-            return { frame: parseInt(cue), description: "", id: Date.now() };
+            return { frame: parseInt(cue), description: "", id: ID() };
           })
       );
     }
@@ -80,10 +87,10 @@ export default function App() {
   };
 
   const addRow = () => {
-    setAudioCues([...audioCues, { frame: 0, id: Date.now(), description: "" }]);
+    setAudioCues([...audioCues, { frame: 0, id: ID(), description: "" }]);
   };
 
-  const removeRow = (id: number) => {
+  const removeRow = (id: string) => {
     setAudioCues(audioCues.filter((a) => a.id !== id));
   };
 
