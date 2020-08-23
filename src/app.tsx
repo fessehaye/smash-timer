@@ -38,7 +38,7 @@ export default function App() {
       searchParams.get("frames") ? parseInt(searchParams.get("frames")) : 60
     );
 
-    if (searchParams.get("audioCues").split(",").length > 0) {
+    if (searchParams.get("audioCues")) {
       setAudioCues(
         searchParams
           .get("audioCues")
